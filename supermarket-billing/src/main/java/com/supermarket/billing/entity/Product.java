@@ -19,8 +19,7 @@ public class Product {
     private String name;
     private double price;
 
-    @ManyToMany(mappedBy = "products")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private Set<Transaction> transactions = new HashSet<>();
-
     // Getters and setters
 }
