@@ -1,25 +1,28 @@
 package com.supermarket.billing.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Setter
+@Getter
+@Builder
 @Table(name = "customers")
 public class Customer {
-    @Setter
-    @Getter
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
+    @Id
+    @GeneratedValue
+    @Column(columnDefinition = "varchar(7)")
+    private Long id;
+    @Column(length = 100)
     private String name;
     private String address;
+    private String email;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer")
     private List<Transaction> transactions;
 
-    // Getters and setters
 }
