@@ -20,7 +20,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private BigDecimal price;
+    private double price;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private Set<Transaction> transactions = new HashSet<>();

@@ -14,7 +14,5 @@ public class CustomerDTO {
     private String name;
     private String address;
     private String contactNumber;
-    // Other relevant fields and constructors
 
-    // Getters and setters
 }

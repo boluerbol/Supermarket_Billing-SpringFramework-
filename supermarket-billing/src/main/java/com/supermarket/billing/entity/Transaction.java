@@ -33,5 +33,13 @@ public class Transaction {
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 
+    public Object getAmount() {
+        return totalAmount;
+    }
+
+    public void setAmount(double v) {
+        this.totalAmount = v;
+    }
+
     // Getters and setters
 }

@@ -45,7 +45,7 @@ public class DataLoader implements CommandLineRunner {
         for (int i = 1; i <= 100; i++) {
             Product product = new Product();
             product.setName("Product" + i);
-            product.setPrice(BigDecimal.valueOf(ThreadLocalRandom.current().nextDouble(1, 100)));
+            product.setPrice(ThreadLocalRandom.current().nextDouble(1, 100));
             productRepository.save(product);
         }
 
