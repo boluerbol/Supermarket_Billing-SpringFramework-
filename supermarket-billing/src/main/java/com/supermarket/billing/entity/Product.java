@@ -22,7 +22,7 @@ public class Product {
     private String name;
     private double price;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)//one to many
     private Set<Transaction> transactions = new HashSet<>();
     // Getters and setters
 }

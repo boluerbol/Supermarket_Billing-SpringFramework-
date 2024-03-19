@@ -31,7 +31,6 @@ public class ProductRepositoryTest {
         product.setName("Test Product");
         product.setPrice(10.0);
         productRepository.save(product);
-
         Optional<Product> optionalProduct = productRepository.findById(product.getId());
         assertTrue(optionalProduct.isPresent());
         assertEquals(product, optionalProduct.get());
@@ -43,7 +42,6 @@ public class ProductRepositoryTest {
         product.setName("Test Product");
         product.setPrice(10.0);
         productRepository.save(product);
-
         product.setPrice(15.0);
         productRepository.save(product);
 

@@ -43,7 +43,6 @@ public class ClientRepositoryTest {
         // Add more assertions to verify the list of clients if needed
     }
 
-    // Test for deleting a client from the database
     @Test
     public void testDeleteClient() {
         // Create a new client

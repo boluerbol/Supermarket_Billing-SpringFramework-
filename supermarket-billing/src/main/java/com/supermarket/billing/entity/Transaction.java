@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Entity
@@ -26,20 +29,13 @@ public class Transaction {
     private Product product;
 
     private int quantity;
-    private double totalAmount;
+    private double Amount;
 
 
     @ManyToOne
-    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    @JoinColumn(name = "client_id", referencedColumnName = "id") // many to one
     private Client client;
-
-    public Object getAmount() {
-        return totalAmount;
-    }
-
-    public void setAmount(double v) {
-        this.totalAmount = v;
-    }
+    private String description;
 
     // Getters and setters
 }

@@ -67,7 +67,6 @@ public class TransactionRepositoryTest {
     @Test
     public void testDeleteTransaction() {
         Transaction transaction = new Transaction();
-        // Set transaction details
         transactionRepository.save(transaction);
 
         transactionRepository.delete(transaction);

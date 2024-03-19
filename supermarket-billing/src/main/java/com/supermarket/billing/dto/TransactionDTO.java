@@ -18,5 +18,6 @@ public class TransactionDTO {
     private LocalDateTime transactionDateTime;
     private List<ProductDTO> products;
     private CustomerDTO customer;
-    private double totalAmount;
+    private double Amount;
+    private String description;
 }

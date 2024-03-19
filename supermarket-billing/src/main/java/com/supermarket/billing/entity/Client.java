@@ -21,7 +21,7 @@ public class Client {
     private Long id;
     private String username;
     private String email;
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)// one to many
     private List<Transaction> transactions;
 
 }

@@ -45,7 +45,7 @@ public class CustomerRepositoryTest {
 
     @Test
     public void testDeleteCustomer() {
-        // Save a customer
+
         Customer customer = new Customer();
         customer.setName("Test Customer");
         customer.setEmail("testcustomer@example.com");
