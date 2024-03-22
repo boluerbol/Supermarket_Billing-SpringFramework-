@@ -15,9 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 public class TransactionDTO {
     private Long id;
-    private LocalDateTime transactionDateTime;
-    private List<ProductDTO> products;
+    private ProductDTO products;
     private CustomerDTO customer;
-    private double Amount;
+    private double amount;
     private String description;
 }

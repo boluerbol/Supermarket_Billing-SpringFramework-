@@ -9,14 +9,8 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface ProductMapper {
-    @InheritInverseConfiguration
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "name", ignore = true)
-    @Mapping(target = "price", ignore = true)
-    ProductDTO productToProductDTO(Product product);
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "name", ignore = true)
-    @Mapping(target = "price", ignore = true)
+    ProductDTO productToProductDTO(Product product);
+    @Mapping(target = "transactions", ignore = true)
     Product productDTOToProduct(ProductDTO productDTO);
 }

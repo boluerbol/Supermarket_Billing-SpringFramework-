@@ -22,6 +22,8 @@ public class Customer {
     private String address;
     private String email;
 
+
+
     @OneToMany(mappedBy = "customer")// one to many
     private List<Transaction> transactions;
 

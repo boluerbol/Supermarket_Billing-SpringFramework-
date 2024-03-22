@@ -36,7 +36,7 @@ public class DataLoader implements CommandLineRunner {
         // Generate and save clients
         for (int i = 1; i <= 100; i++) {
             Client client = new Client();
-            client.setUsername("user" + i);
+            client.setUsername("user" + 1);
             client.setEmail("user" + i + "@example.com");
             clientRepository.save(client);
         }

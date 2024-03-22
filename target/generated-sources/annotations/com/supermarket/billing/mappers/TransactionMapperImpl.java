@@ -2,16 +2,22 @@ package com.supermarket.billing.mappers;
 
 import com.supermarket.billing.dto.TransactionDTO;
 import com.supermarket.billing.entity.Transaction;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.processing.Generated;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-19T15:18:45+0600",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
+    date = "2024-03-22T16:26:24+0600",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
+@Component
 public class TransactionMapperImpl implements TransactionMapper {
+
+    @Autowired
+    private ProductMapper productMapper;
+    @Autowired
+    private CustomerMapper customerMapper;
 
     @Override
     public TransactionDTO transactionToTransactionDTO(Transaction transaction) {
@@ -19,23 +25,15 @@ public class TransactionMapperImpl implements TransactionMapper {
             return null;
         }
 
-        TransactionDTO transactionDTO = new TransactionDTO();
+        TransactionDTO.TransactionDTOBuilder transactionDTO = TransactionDTO.builder();
 
-        return transactionDTO;
-    }
+        transactionDTO.products( productMapper.productToProductDTO( transaction.getProduct() ) );
+        transactionDTO.id( transaction.getId() );
+        transactionDTO.customer( customerMapper.customerToCustomerDTO( transaction.getCustomer() ) );
+        transactionDTO.amount( transaction.getAmount() );
+        transactionDTO.description( transaction.getDescription() );
 
-    @Override
-    public List<TransactionDTO> transactionsToTransactionDTOs(List<Transaction> transactions) {
-        if ( transactions == null ) {
-            return null;
-        }
-
-        List<TransactionDTO> list = new ArrayList<TransactionDTO>( transactions.size() );
-        for ( Transaction transaction : transactions ) {
-            list.add( transactionToTransactionDTO( transaction ) );
-        }
-
-        return list;
+        return transactionDTO.build();
     }
 
     @Override
@@ -44,22 +42,13 @@ public class TransactionMapperImpl implements TransactionMapper {
             return null;
         }
 
-        Transaction transaction = new Transaction();
+        Transaction.TransactionBuilder transaction = Transaction.builder();
 
-        return transaction;
-    }
+        transaction.id( transactionDTO.getId() );
+        transaction.customer( customerMapper.customerDTOToCustomer( transactionDTO.getCustomer() ) );
+        transaction.amount( transactionDTO.getAmount() );
+        transaction.description( transactionDTO.getDescription() );
 
-    @Override
-    public List<Transaction> transactionDTOsToTransactions(List<TransactionDTO> transactionDTOs) {
-        if ( transactionDTOs == null ) {
-            return null;
-        }
-
-        List<Transaction> list = new ArrayList<Transaction>( transactionDTOs.size() );
-        for ( TransactionDTO transactionDTO : transactionDTOs ) {
-            list.add( transactionDTOToTransaction( transactionDTO ) );
-        }
-
-        return list;
+        return transaction.build();
     }
 }
