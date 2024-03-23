@@ -1,6 +1,7 @@
 package com.supermarket.billing.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Name is required")
     private String name;
     private double price;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)//one to many

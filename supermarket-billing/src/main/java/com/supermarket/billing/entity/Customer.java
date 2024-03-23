@@ -1,6 +1,7 @@
 package com.supermarket.billing.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class Customer {
     @Column(columnDefinition = "varchar(7)")
     private Long id;
     @Column(length = 100)
+    @NotBlank(message = "Name is required")
     private String name;
     private String address;
     private String email;
