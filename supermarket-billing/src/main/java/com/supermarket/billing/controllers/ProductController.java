@@ -1,6 +1,7 @@
 package com.supermarket.billing.controllers;
 
 import com.supermarket.billing.entity.Product;
+import com.supermarket.billing.services.CustomerService;
 import com.supermarket.billing.services.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +12,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
-
-    private ProductService productService; // Assuming you have a ProductService class
+    private final ProductService productService;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }// Assuming you have a ProductService class
 
     @GetMapping
     public List<Product> getAllProducts() {

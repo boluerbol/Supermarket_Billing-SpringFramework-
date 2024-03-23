@@ -1,6 +1,7 @@
 package com.supermarket.billing.controllers;
 
 import com.supermarket.billing.entity.Customer;
+import com.supermarket.billing.services.ClientService;
 import com.supermarket.billing.services.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,10 @@ import java.util.List;
 public class CustomerController {
 
 
-    private CustomerService customerService; // Assuming you have a CustomerService class
+    private final CustomerService customerService; // Assuming you have a CustomerService class
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @GetMapping
     public List<Customer> getAllCustomers() {
