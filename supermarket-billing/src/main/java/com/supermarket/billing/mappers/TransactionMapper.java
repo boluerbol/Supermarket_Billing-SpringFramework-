@@ -5,7 +5,7 @@ import com.supermarket.billing.entity.Transaction;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {ProductMapper.class, CustomerMapper.class})
+@Mapper
 public interface TransactionMapper {
 
     @Mapping(target = "products", source = "product")
