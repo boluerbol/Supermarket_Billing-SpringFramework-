@@ -15,8 +15,10 @@ import java.util.List;
 @AllArgsConstructor
 public class TransactionDTO {
     private Long id;
-    private ProductDTO products;
-    private CustomerDTO customer;
-    private double amount;
-    private String description;
+    private Long clientId;
+    private Long customerId;
+    private Long productId;
+    private int quantity;
+    private double totalPrice;
+    private LocalDateTime transactionTime;
 }

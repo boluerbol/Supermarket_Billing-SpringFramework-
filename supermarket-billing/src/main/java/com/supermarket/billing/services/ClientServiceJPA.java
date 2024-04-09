@@ -35,6 +35,9 @@ public class ClientServiceJPA implements ClientService {
         Optional<Client> optionalClient = clientRepository.findById(id);
         if (optionalClient.isPresent()) {
             updatedClient.setId(id);
+            updatedClient.setUsername(optionalClient.get().getUsername());
+            updatedClient.setEmail(optionalClient.get().getEmail());
+            updatedClient.setTransactions(optionalClient.get().getTransactions());
             return clientRepository.save(updatedClient);
         } else {
             return null; // Client with given ID not found

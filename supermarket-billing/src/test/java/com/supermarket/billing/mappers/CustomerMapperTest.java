@@ -14,7 +14,6 @@ public class CustomerMapperTest {
 
     @Test
     void testCustomerToCustomerDTO() {
-        // Create a Customer entity
         Customer customer = Customer.builder()
                 .id(1L)
                 .name("Test Customer")
@@ -24,14 +23,15 @@ public class CustomerMapperTest {
 
         // Map Customer entity to CustomerDTO
         CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(customer);
-        System.out.println(customerDTO.getCustomerNumber());
+        System.out.println(customerDTO.getAddress());
+        System.out.println(customerDTO.getName());
 
         // Assertions
         assertNotNull(customerDTO);
         assertEquals(1L, customerDTO.getId());
         assertEquals("Test Customer", customerDTO.getName());
-        assertEquals("123 Main St", customerDTO.getCustomerAddress());
-        assertEquals(null, customerDTO.getCustomerNumber()); // Assuming contactNumber is mapped to contactNumber in DTO
+        assertEquals("123 Main St", customerDTO.getAddress());
+        assertEquals("test@example.com", customerDTO.getEmail()); // Assuming contactNumber is mapped to contactNumber in DTO
     }
 
     @Test
@@ -40,8 +40,8 @@ public class CustomerMapperTest {
         CustomerDTO customerDTO = CustomerDTO.builder()
                 .id(1L)
                 .name("Test Customer DTO")
-                .customerAddress("456 Oak St")
-                .customerNumber("555-1234")
+                .address("456 Oak St")
+                .email("555-1234")
                 .build();
 
         // Map CustomerDTO to Customer entity

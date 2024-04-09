@@ -1,13 +1,11 @@
 package com.supermarket.billing.mappers;
-
-import com.supermarket.billing.dto.CustomerDTO;
-import com.supermarket.billing.dto.ProductDTO;
 import com.supermarket.billing.dto.TransactionDTO;
-import com.supermarket.billing.entity.Customer;
-import com.supermarket.billing.entity.Product;
+import com.supermarket.billing.entity.*;
 import com.supermarket.billing.entity.Transaction;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
+
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,67 +15,61 @@ public class TransactionMapperTest{
     private final TransactionMapper mapper = Mappers.getMapper(TransactionMapper.class);
 
     @Test
-    void testTransactionToTransactionDTO() {
-        // Create entities
-        Product product = Product.builder()
-                .id(1L)
-                .name("Product 1")
-                .price(10.0)
-                .build();
-        Customer customer = Customer.builder()
-                .id(1L)
-                .name("Customer 1")
-                .email("customer1@example.com")
-                .build();
-        Transaction transaction = Transaction.builder()
-                .id(1L)
-                .product(product)
-                .customer(customer)
-                .amount(20.0)
-                .description("Description")
-                .build();
+    public void testTransactionToTransactionDTO() {
+        // Create mock entities
+        Client client = new Client();
+        client.setId(1L);
 
-        // Map entity to DTO
+        Customer customer = new Customer();
+        customer.setId(2L);
+
+        Product product = new Product();
+        product.setId(3L);
+
+        Transaction transaction = new Transaction();
+        transaction.setId(100L);
+        transaction.setClient(client);
+        transaction.setCustomer(customer);
+        transaction.setProduct(product);
+        transaction.setQuantity(5);
+        transaction.setTotalPrice(100.00);
+        transaction.setTransactionTime(LocalDateTime.now());
+
+        // Perform mapping
         TransactionDTO transactionDTO = mapper.transactionToTransactionDTO(transaction);
 
-        // Assertions
+        // Verify mapping
         assertEquals(transaction.getId(), transactionDTO.getId());
-        assertEquals(transaction.getProduct().getId(), transactionDTO.getProducts().getId());
-        assertEquals(transaction.getCustomer().getId(), transactionDTO.getCustomer().getId());
-        assertEquals(transaction.getAmount(), transactionDTO.getAmount());
-        assertEquals(transaction.getDescription(), transactionDTO.getDescription());
+        assertEquals(transaction.getClient().getId(), transactionDTO.getClientId());
+        assertEquals(transaction.getCustomer().getId(), transactionDTO.getCustomerId());
+        assertEquals(transaction.getProduct().getId(), transactionDTO.getProductId());
+        assertEquals(transaction.getQuantity(), transactionDTO.getQuantity());
+        assertEquals(transaction.getTotalPrice(), transactionDTO.getTotalPrice());
+        assertEquals(transaction.getTransactionTime(), transactionDTO.getTransactionTime());
     }
 
     @Test
-    void testTransactionDTOToTransaction() {
-        // Create DTO
-        ProductDTO productDTO = ProductDTO.builder()
-                .id(1L)
-                .name("Product 1")
-                .price(10.0)
-                .build();
-        CustomerDTO customerDTO = CustomerDTO.builder()
-                .id(1L)
-                .name("Customer 1")
-                .customerNumber("customer1@example.com")
-                .build();
-        TransactionDTO transactionDTO = TransactionDTO.builder()
-                .id(1L)
-                .products(productDTO)
-                .customer(customerDTO)
-                .amount(20.0)
-                .description("Description")
-                .build();
+    public void testTransactionDTOToTransaction() {
+        // Create mock DTO
+        TransactionDTO transactionDTO = new TransactionDTO();
+        transactionDTO.setId(100L);
+        transactionDTO.setClientId(1L);
+        transactionDTO.setCustomerId(2L);
+        transactionDTO.setProductId(3L);
+        transactionDTO.setQuantity(5);
+        transactionDTO.setTotalPrice(100.00);
+        transactionDTO.setTransactionTime(LocalDateTime.now());
 
-        // Map DTO to entity
+        // Perform mapping
         Transaction transaction = mapper.transactionDTOToTransaction(transactionDTO);
 
-        // Assertions
+        // Verify mapping
         assertEquals(transactionDTO.getId(), transaction.getId());
-        assertEquals(transactionDTO.getProducts().getId(), transaction.getProduct().getId());
-        assertEquals(transactionDTO.getCustomer().getId(), transaction.getCustomer().getId());
-        assertEquals(transactionDTO.getAmount(), transaction.getAmount());
-        assertEquals(transactionDTO.getDescription(), transaction.getDescription());
+        assertEquals(transactionDTO.getClientId(), transaction.getClient().getId());
+        assertEquals(transactionDTO.getCustomerId(), transaction.getCustomer().getId());
+        assertEquals(transactionDTO.getProductId(), transaction.getProduct().getId());
+        assertEquals(transactionDTO.getQuantity(), transaction.getQuantity());
+        assertEquals(transactionDTO.getTotalPrice(), transaction.getTotalPrice());
+        assertEquals(transactionDTO.getTransactionTime(), transaction.getTransactionTime());
     }
-
 }

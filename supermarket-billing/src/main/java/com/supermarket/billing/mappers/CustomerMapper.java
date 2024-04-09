@@ -7,11 +7,8 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface CustomerMapper {
-
-    @Mapping(source = "address", target = "customerAddress") // Example of field mapping
+    @Mapping(target = "transactions" , ignore = true)
     CustomerDTO customerToCustomerDTO(Customer customer);
-
-    @Mapping(source = "customerAddress", target = "address")
-    @Mapping(source = "customerNumber", target = "email")// Example of ignoring a field
+    @Mapping(target = "transactions" , ignore = true)
     Customer customerDTOToCustomer(CustomerDTO customerDTO);
 }

@@ -14,23 +14,28 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Table(name = "transactions")
 public class Transaction {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
-    @NotBlank(message = "Quantity is required")
-    private int quantity;
-    private double amount;
-    @ManyToOne
-    @JoinColumn(name = "client_id", referencedColumnName = "id") // many to one
-    private Client client;
-    private String description;
 
-    // Getters and setters
+    @Column(nullable = true)
+    private int quantity;
+
+    @Column(nullable = true)
+    private double totalPrice;
+
+    @Column(nullable = true)
+    private LocalDateTime transactionTime;
 }

@@ -147,7 +147,6 @@ public class IntegrationTests {
                 .andExpect(jsonPath("$.id").value(1L));
 
         // Update transaction
-        transaction.setDescription("Updated Transaction");
         mockMvc.perform(put("/api/transactions/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(transaction)))

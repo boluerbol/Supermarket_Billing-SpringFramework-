@@ -1,5 +1,6 @@
 package com.supermarket.billing.services;
 
+import com.supermarket.billing.entity.Client;
 import com.supermarket.billing.entity.Transaction;
 import com.supermarket.billing.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +11,8 @@ import java.util.Optional;
 
 @Service
 public class TransactionServiceJPA implements TransactionService {
-
-    private final TransactionRepository transactionRepository;
-
     @Autowired
-    public TransactionServiceJPA(TransactionRepository transactionRepository) {
-        this.transactionRepository = transactionRepository;
-    }
+    private TransactionRepository transactionRepository;
 
     @Override
     public List<Transaction> getAllTransactions() {
@@ -35,10 +31,14 @@ public class TransactionServiceJPA implements TransactionService {
     }
 
     @Override
-    public Transaction updateTransaction(Long id, Transaction transaction) {
-        if (transactionRepository.existsById(id)) {
-            transaction.setId(id);
-            return transactionRepository.save(transaction);
+    public Transaction updateTransaction(Long id, Transaction updatedTransaction) {
+        Optional<Transaction> optionalTransaction = transactionRepository.findById(id);
+        if (optionalTransaction.isPresent()) {
+            updatedTransaction.setId(id);
+            updatedTransaction.setClient(optionalTransaction.get().getClient());
+            updatedTransaction.setCustomer(optionalTransaction.get().getCustomer());
+            updatedTransaction.setTotalPrice(optionalTransaction.get().getTotalPrice());
+            return transactionRepository.save(updatedTransaction);
         }
         return null;
     }

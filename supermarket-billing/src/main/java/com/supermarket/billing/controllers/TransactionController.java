@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @Validated
-@RequestMapping("/api/transactions")
+@RequestMapping("/api/v1/transactions")
 public class TransactionController {
 
     private TransactionService transactionService;

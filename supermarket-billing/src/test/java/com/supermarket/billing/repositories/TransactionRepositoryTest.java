@@ -54,13 +54,13 @@ public class TransactionRepositoryTest {
 
         // Modify the retrieved transaction
         Transaction modifiedTransaction = retrievedTransaction.get();
-        modifiedTransaction.setAmount(100.00); // For example, update the amount
+        modifiedTransaction.setTotalPrice(100.00); // For example, update the amount
         transactionRepository.save(modifiedTransaction);
 
         // Retrieve the transaction again to verify the update
         Optional<Transaction> updatedTransaction = transactionRepository.findById(transaction.getId());
         assertTrue(updatedTransaction.isPresent());
-        assertEquals(100.00, updatedTransaction.get().getAmount());
+        assertEquals(100.00, updatedTransaction.get().getTotalPrice());
     }
 
 

@@ -1,9 +1,12 @@
 package com.supermarket.billing.dto;
 
+import com.supermarket.billing.entity.Transaction;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -12,9 +15,5 @@ import lombok.NoArgsConstructor;
 public class ClientDTO {
     private Long id;
     private String companyName;
-    private String industry;
-    private String contactPerson;
-    // Other relevant fields and constructors
-
-    // Getters and setters
+    private List<Transaction> transactions;
 }
